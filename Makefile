@@ -6,7 +6,7 @@
 #    By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/11 12:36:39 by amurcia-          #+#    #+#              #
-#    Updated: 2023/09/01 20:26:28 by amurcia-         ###   ########.fr        #
+#    Updated: 2023/09/02 19:21:55 by amurcia-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ NAME 			= computor_v1
 MAIN			= main.c
 GETTERS			= getters.c
 SETTERS			= setters.c
-SRC_UTILS 		= ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c
+SRC_UTILS 		= ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c ft_free.c
 SRC		 		= $(SRC_UTILS) $(SETTERS) $(GETTERS)
 
 # FOLDERS
@@ -75,8 +75,23 @@ fclean : clean
 
 re : fclean all
 
-run: all
+run1: all
 	@./$(BIN) "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
+
+run2: all
+	@./$(BIN) "5 * X^0 + 4 * X^1 = 4 * X^0"
+
+run3: all
+	@./$(BIN) "5 * X^0 + 4 * X^1 + 4 * X^2 = 4 * X^0 + 4 * X^2"
+
+run4: all
+	@./$(BIN) "5 * X^0 = 5 * X^0"
+
+run4: all
+	@./$(BIN) "5 * X^0 = 4 * X^0 + 7 * X^1"
+
+run5: all
+	@./$(BIN) "6 * X^0 + 11 * X^1 - 5 * X^2 = 1 * X^0 + 1 * X^1"
 
 leaks: $(BIN)
 	@leaks -atExit -- ./$(BIN) "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
@@ -92,4 +107,4 @@ $(BIN_DIR):
 
 -include $(DEPS)
 
-.PHONY : all clean fclean re run leaks
+.PHONY : all clean fclean re run1 run2 run3 leaks

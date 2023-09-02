@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/01 20:26:58 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 19:22:48 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void	ft_first_degree(t_letters let)
 {
 	double	result;
 
-	result = let.c / let.b;
+	result = - let.c / let.b;
 	printf("The solution is:\n%lf\n", result);
 }
 
@@ -54,9 +54,38 @@ void	ft_classify(t_letters let, int degree)
 		ft_first_degree(let);
 }
 
-
-void	ft_correct_degree(int degree)
+void	ft_reduced_form(t_letters let)
 {
+	printf("Reduced form: ");
+	if (let.c != 0)
+		printf("%lf * X^0 ", let.c);
+	if (let.b != 0)
+	{
+		if (let.b > 0)
+			printf("+");
+		printf(" %lf * X^1 ", let.b);
+	}
+	if (let.a != 0)
+	{
+		if (let.a > 0)
+			printf("+");
+		printf(" %lf * X^2", let.a);
+	}
+	printf(" = 0\n");
+}
+
+void	ft_correct_degree(int degree, t_letters *let)
+{
+	if (degree == 0 && let->c == 0)
+	{
+		printf("All the real numbers are a solution\n");
+		exit(1);
+	}
+	if (degree == 0 && let->c != 0)
+	{
+		printf("No posible solution\n");
+		exit(1);
+	}
 	if (degree > 2)
 	{
 		printf("Polynomial degree: %d\nThe polynomial degree is strictly greater than 2, I can't solve.\n", degree);
@@ -67,16 +96,19 @@ void	ft_correct_degree(int degree)
 int	main(int argc, char **argv)
 {
 	t_letters	letter;
-	int	degree;
+	int			degree;
 
 	if (argc != 2)
 	{
 		printf("Error in number of arguments\n");
 		return(-1);
 	}
+	ft_seet_initial_letters(&letter);
+	ft_set_letters(&letter, argv);
+	ft_reduced_form(letter);
 	degree = ft_get_degree(argv);
-	ft_correct_degree(degree);	
-	ft_set_letters(&letter, argv, degree);
+	ft_correct_degree(degree, &letter);	
+	degree = ft_get_true_degree(letter);
 	printf("Polynomial degree: %d\n", degree);
 	ft_classify(letter, degree);
 }

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/20 10:47:32 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/01 20:28:10 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 19:02:37 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ static size_t	ft_count_words(char *s, char c)
 	return (word);
 }
 
-static void	ft_free(char **d, size_t cont_d)
+static void	ft_free_split(char **d, size_t cont_d)
 {
 	while (cont_d > 0)
 	{
@@ -56,7 +56,7 @@ static char	**ft_refile(char *s, char c, char **d)
 			d[cont_d] = ft_substr(s, start, cont - start + 1);
 			if (!d[cont_d])
 			{
-				ft_free(d, cont_d);
+				ft_free_split(d, cont_d);
 				return (NULL);
 			}
 			cont_d++;

@@ -6,11 +6,20 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:23 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/01 20:28:30 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 19:17:29 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../computor.h"
+
+int	ft_get_true_degree(t_letters let)
+{
+	if (let.a != 0)
+		return (2);
+	if (let.b != 0)
+		return (1);
+	return (0);
+}
 
 int	ft_get_degree(char **argv)
 {

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/01 20:28:27 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 19:03:09 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,59 +14,105 @@
 
 static void	ft_set_a(char **fragments, int i, t_letters *let)
 {
-	let->a = atof(fragments[i - 2]);
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
-		let->a = -let->a;
+		let->a -= atof(fragments[i - 2]);
+	else
+		let->a += atof(fragments[i - 2]);
 }
 
 static void	ft_set_b(char **fragments, int i, t_letters *let)
 {
-	let->b = atof(fragments[i - 2]);
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
-		let->b = -let->b;
+		let->b -= atof(fragments[i - 2]);
+	else
+		let->b += atof(fragments[i - 2]);
 }
 
 static void	ft_set_c(char **fragments, int i, t_letters *let)
 {
-	let->c = atof(fragments[i - 2]);
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
-		let->c = -let->c;
+		let->c -= atof(fragments[i - 2]);
+	else
+		let->c += atof(fragments[i - 2]);
 }
 
-static void	ft_set_rest(char **fragments, int i, t_letters *let)
+static void	ft_set_a_(char **fragments, int i, t_letters *let)
 {
-	let->rest = atof(fragments[i + 1]);
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
-		let->rest = -let->rest;
+		let->a += atof(fragments[i - 2]);
+	else
+		let->a -= atof(fragments[i - 2]);
 }
 
-
-void	ft_set_letters(t_letters *let, char **argv, int degree)
+static void	ft_set_b_(char **fragments, int i, t_letters *let)
 {
-	char	**fragments;
+	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
+		let->b += atof(fragments[i - 2]);
+	else
+		let->b -= atof(fragments[i - 2]);
+}
+
+static void	ft_set_c_(char **fragments, int i, t_letters *let)
+{
+	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
+	let->c += atof(fragments[i - 2]);
+	else
+		let->c -= atof(fragments[i - 2]);
+}
+
+void	ft_set_negative(t_letters *let, char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_strncmp(str[i], "X^2", 3) == 0)
+			ft_set_a_(str, i, let);
+		else if (ft_strncmp(str[i], "X^1", 3) == 0)
+			ft_set_b_(str, i, let);
+		else if (ft_strncmp(str[i], "X^0", 3) == 0)
+			ft_set_c_(str, i, let);
+		i++;
+	}
+	ft_free(str);
+}
+
+void	ft_set_positive(t_letters *let, char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_strncmp(str[i], "X^2", 3) == 0)
+			ft_set_a(str, i, let);
+		else if (ft_strncmp(str[i], "X^1", 3) == 0)
+			ft_set_b(str, i, let);
+		else if (ft_strncmp(str[i], "X^0", 3) == 0)
+			ft_set_c(str, i, let);
+		i++;
+	}
+	ft_free(str);
+}
+
+void	ft_set_letters(t_letters *let, char **argv)
+{
+	char	**equal;
 	int		i;
 	int		rep;
 
 	i = 0;
 	rep = 0;
-	fragments = ft_split(argv[1], ' ');
-	while (fragments[i])
-	{
-		if (ft_strncmp(fragments[i], "X^2", 3) == 0)
-			ft_set_a(fragments, i, let);
-		else if (ft_strncmp(fragments[i], "X^1", 3) == 0)
-			ft_set_b(fragments, i, let);
-		else if (ft_strncmp(fragments[i], "X^0", 3) == 0 && rep == 0)
-		{
-			rep = 1;
-			ft_set_c(fragments, i, let);
-		}
-		else if (ft_strncmp(fragments[i], "=", 1) == 0 && fragments[i + 1])
-			ft_set_rest(fragments, i, let);
-		i++;
-	}
-	if (degree == 2)
-		let->c += - let->rest;
-	else
-		let->c = - let->c + let->rest;
+	equal = ft_split(argv[1], '=');
+	ft_set_positive(let, ft_split(equal[0], ' '));
+	ft_set_negative(let, ft_split(equal[1], ' '));
+	ft_free(equal);
+}
+
+void	ft_seet_initial_letters(t_letters *let)
+{
+	let->a = 0;
+	let->b = 0;
+	let->c = 0;
 }
