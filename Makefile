@@ -6,7 +6,7 @@
 #    By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/11 12:36:39 by amurcia-          #+#    #+#              #
-#    Updated: 2023/09/02 20:01:12 by amurcia-         ###   ########.fr        #
+#    Updated: 2023/09/02 21:04:05 by amurcia-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,8 +34,9 @@ SRC		 		= $(SRC_UTILS) $(SETTERS) $(GETTERS)
 MAIN_B				= main_bonus.c
 GETTERS_B			= getters_bonus.c
 SETTERS_B			= setters_bonus.c
+ERRORS				= check_bonus.c
 SRC_UTILS_B 		= ft_split_bonus.c ft_strlen_bonus.c ft_strncmp_bonus.c ft_substr_bonus.c ft_free_bonus.c
-SRC_B		 		= $(SRC_UTILS_B) $(SETTERS_B) $(GETTERS_B)
+SRC_B		 		= $(SRC_UTILS_B) $(SETTERS_B) $(GETTERS_B)  $(ERRORS)
 
 # FOLDERS
 OBJ_DIR			:= obj
@@ -105,6 +106,8 @@ re : fclean all
 
 run1: all
 	@./$(BIN) "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
+run1b: all
+	@./$(BIN_B) "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
 
 run2: all
 	@./$(BIN) "5 * X^0 + 4 * X^1 = 4 * X^0"

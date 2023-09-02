@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/02 19:53:12 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:24:07 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ void	ft_reduced_form(t_letters let)
 		printf("%lf * X^0 ", let.c);
 	if (let.b != 0)
 	{
-		if (let.b > 0)
+		if (let.b > 0 && let.c > 0)
 			printf("+");
 		printf(" %lf * X^1 ", let.b);
 	}

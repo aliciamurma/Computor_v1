@@ -6,14 +6,28 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/02 19:53:20 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 20:22:47 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/mandatory/computor.h"
 
+static bool	ft_set_one(char **fragments, int i, t_letters *let)
+{
+	if (i < 3)
+	{
+		if (i == 0 && ft_strncmp(fragments[0], "-", 1) == 0)
+			let->a -= 1;
+		else
+			let->a += 1;
+		return (true);
+	}
+	return (false);
+}
 static void	ft_set_a(char **fragments, int i, t_letters *let)
 {
+	if (ft_set_one(fragments, i, let))
+		return ;
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
 		let->a -= atof(fragments[i - 2]);
 	else
@@ -22,6 +36,8 @@ static void	ft_set_a(char **fragments, int i, t_letters *let)
 
 static void	ft_set_b(char **fragments, int i, t_letters *let)
 {
+	if (ft_set_one(fragments, i, let))
+		return ;
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
 		let->b -= atof(fragments[i - 2]);
 	else
@@ -30,6 +46,8 @@ static void	ft_set_b(char **fragments, int i, t_letters *let)
 
 static void	ft_set_c(char **fragments, int i, t_letters *let)
 {
+	if (ft_set_one(fragments, i, let))
+		return ;
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
 		let->c -= atof(fragments[i - 2]);
 	else
@@ -38,6 +56,8 @@ static void	ft_set_c(char **fragments, int i, t_letters *let)
 
 static void	ft_set_a_(char **fragments, int i, t_letters *let)
 {
+	if (ft_set_one(fragments, i, let))
+		return ;
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
 		let->a += atof(fragments[i - 2]);
 	else
@@ -46,6 +66,8 @@ static void	ft_set_a_(char **fragments, int i, t_letters *let)
 
 static void	ft_set_b_(char **fragments, int i, t_letters *let)
 {
+	if (ft_set_one(fragments, i, let))
+		return ;
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
 		let->b += atof(fragments[i - 2]);
 	else
@@ -54,10 +76,15 @@ static void	ft_set_b_(char **fragments, int i, t_letters *let)
 
 static void	ft_set_c_(char **fragments, int i, t_letters *let)
 {
+	if (ft_set_one(fragments, i, let))
+		return ;
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
-	let->c += atof(fragments[i - 2]);
+		let->c += atof(fragments[i - 2]);
 	else
+	{
+		printf("hola\n");
 		let->c -= atof(fragments[i - 2]);
+	}
 }
 
 void	ft_set_negative(t_letters *let, char **str)
