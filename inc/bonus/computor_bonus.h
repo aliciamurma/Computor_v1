@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:39:15 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/02 21:05:03 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 22:01:10 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ typedef struct	s_letters
 	double	a;
 	double	b;
 	double	c;
-	double	rest;
+	double	d;
 }	t_letters;
 
 void	ft_seet_initial_letters(t_letters *let);
