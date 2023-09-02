@@ -6,7 +6,7 @@
 #    By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/11 12:36:39 by amurcia-          #+#    #+#              #
-#    Updated: 2023/09/02 21:04:05 by amurcia-         ###   ########.fr        #
+#    Updated: 2023/09/02 23:22:44 by amurcia-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,14 +28,14 @@ NAME_B 			= computor_v1_bonus
 MAIN			= main.c
 GETTERS			= getters.c
 SETTERS			= setters.c
-SRC_UTILS 		= ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c ft_free.c
+SRC_UTILS 		= ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c ft_free.c ft_free_zeros.c
 SRC		 		= $(SRC_UTILS) $(SETTERS) $(GETTERS)
 # SOURCES_BONUS
 MAIN_B				= main_bonus.c
 GETTERS_B			= getters_bonus.c
 SETTERS_B			= setters_bonus.c
 ERRORS				= check_bonus.c
-SRC_UTILS_B 		= ft_split_bonus.c ft_strlen_bonus.c ft_strncmp_bonus.c ft_substr_bonus.c ft_free_bonus.c
+SRC_UTILS_B 		= ft_split_bonus.c ft_strlen_bonus.c ft_strncmp_bonus.c ft_substr_bonus.c ft_free_bonus.c ft_free_zeros_bonus.c
 SRC_B		 		= $(SRC_UTILS_B) $(SETTERS_B) $(GETTERS_B)  $(ERRORS)
 
 # FOLDERS

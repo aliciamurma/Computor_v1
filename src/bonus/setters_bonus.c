@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/02 22:23:19 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:23:44 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,9 +132,45 @@ void	ft_set_positive(t_letters *let, char **str)
 			ft_set_b(str, i, let);
 		else if (ft_strncmp(str[i], "X^0", 3) == 0)
 			ft_set_c(str, i, let);
+		else if (ft_strncmp(str[i], "X", 1) == 0)
+			ft_set_b(str, i, let);
 		i++;
 	}
 	ft_free(str);
+}
+
+bool	ft_isdouble(char *str)
+{
+	int	i;
+
+	i =  0;
+	while (str[i])
+	{
+		if (!isdigit(str[i]) && str[i] != '.')
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+void	ft_set_alone(char **argv, t_letters *let)
+{
+	char	**frag;
+	int		i;
+
+	i = 0;
+	frag = ft_split(argv[1], ' ');
+	while(frag[i])
+	{
+		if (ft_isdouble(frag[i]) && frag[i][0] != 'X')
+		{
+			if (i > 0 && ft_strncmp(frag[i -1], "-", 1) == 0)
+				let->c = let->c + atof(frag[i]);
+			else
+				let->c = let->c - atof(frag[i]);
+		}
+		i++;
+	}
 }
 
 void	ft_set_letters(t_letters *let, char **argv)
@@ -146,6 +182,7 @@ void	ft_set_letters(t_letters *let, char **argv)
 	i = 0;
 	rep = 0;
 	equal = ft_split(argv[1], '=');
+	ft_set_alone(argv, let);
 	ft_set_positive(let, ft_split(equal[0], ' '));
 	ft_set_negative(let, ft_split(equal[1], ' '));
 	ft_free(equal);

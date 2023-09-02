@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/02 22:33:28 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/02 23:08:55 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,34 +44,33 @@ void	ft_fraction(double root)
 	printf("The fraction is: %d/%d\n", num, denom);
 }
 
-
 void	ft_second_degree(t_letters let)
 {
 	double	discriminant;
 	double	root1;
 	double	root2;
 
-	printf("To solve a second degree function, we will follow the equation: -b +- sqrt(-4*b*c)/(2*a) : -%.1lf +- sqrt(-4 * %.1lf * %.1lf)/(2 * %lf)\n", let.b, let.b, let.c, let.a);
+	printf("To solve a second degree function, we will follow the equation: -b +- sqrt(-4*b*c)/(2*a) : -%s +- sqrt(-4 * %s * %s)/(2 * %s)\n", ft_take_zeros(let.b), ft_take_zeros(let.b), ft_take_zeros(let.c), ft_take_zeros(let.a));
 	discriminant = let.b * let.b -4 * let.a * let.c;
 	if (discriminant > 0)
 	{
 		root1 = (-let.b + sqrt(discriminant)) / (2 * let.a);
 		root2 = (-let.b - sqrt(discriminant)) / (2 * let.a);
-		printf("Discriminant is strictly positive, the two solutions are:\n%.1lf \n%.1lf\n", root1, root2);
+		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", ft_take_zeros(root1), ft_take_zeros(root2));
 		ft_fraction(root1);
 		ft_fraction(root2);
 	}
 	else if (discriminant == 0)
 	{
 		root1 = - let.b / (2 * let.a);
-		printf("The solution is:\n%.1lf\n", root1);
+		printf("The solution is:\n%s\n", ft_take_zeros(root1));
 		ft_fraction(root1);
 	}
 	else
 	{
 		root1 = - let.b/ (2 * let.a);
 		root2 = sqrt(- discriminant) / (2 * let.a);
-		printf("The solution is:\nReal: %lf\nImaginary: %lf\n", root1, root2);
+		printf("The solution is:\nReal: %s\nImaginary: %s\n", ft_take_zeros(root1), ft_take_zeros(root2));
 		ft_fraction(root1);
 		ft_fraction(root2);
 	}
@@ -81,10 +80,10 @@ void	ft_first_degree(t_letters let)
 {
 	double	result;
 
-	result = let.c / let.b;
-	printf("The solution is: %.2lf\n", result);
+	result = - let.c / let.b;
+	printf("The solution is: %s\n", ft_take_zeros(result));
 	
-	printf("The fraction is: %d/%d\n", (int)let.c, (int)let.b);
+	printf("The fraction is: - %s/%s\n", ft_take_zeros(let.c), ft_take_zeros(let.b));
 }
 
 void	ft_classify(t_letters let, int degree)
@@ -98,21 +97,6 @@ void	ft_classify(t_letters let, int degree)
 }
 
 /**
- * @brief If we have a double that only has 0 after the dot, return 1
- * 
- * @return true 
- * @return false 
- */
-bool	ft_dot_zero(double nbr)
-{
-	int int_part = (int)nbr;
-
-    if (nbr == (double)int_part)
-		return (1);
-	return (0);
-}
-
-/**
  * @brief Print the reducted form
  * 
  * @param let 
@@ -121,29 +105,18 @@ void	ft_reduced_form(t_letters let)
 {
 	printf("Reduced form: ");
 	if (let.c != 0)
-	{
-		if (ft_dot_zero(let.c))
-			printf("%d * X^0 ", (int)let.c);
-		else
-			printf("%.1lf * X^0 ", let.c);
-	}
+		printf("%s * X^0 ", ft_take_zeros(let.c));
 	if (let.b != 0)
 	{
 		if (let.b > 0  && let.c > 0)
 			printf("+ ");
-		if (ft_dot_zero(let.c))
-			printf("%d * X^1 ", (int)let.b);
-		else
-			printf(" %.1lf * X^1 ", let.b);
+		printf(" %s * X^1 ", ft_take_zeros(let.b));
 	}
 	if (let.a != 0)
 	{
 		if (let.a > 0)
 			printf("+");
-		if (ft_dot_zero(let.c))
-			printf("%d * X^2 ", (int)let.a);
-		else
-			printf(" %.1lf * X^2 ", let.a);
+		printf(" %s * X^2 ", ft_take_zeros(let.a));
 	}
 	printf("= 0\n\n");
 }
