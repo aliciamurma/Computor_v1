@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/03 14:27:01 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:33:17 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,8 +88,8 @@ void	ft_first_degree(t_letters let)
 
 void	ft_classify(t_letters let, int degree)
 {
-	// if (degree == 3)
-	// 	ft_third_degree(let);
+	if (degree == 3)
+		ft_third_degree(let);
 	if (degree == 2)
 		ft_second_degree(let);
 	if (degree == 1)

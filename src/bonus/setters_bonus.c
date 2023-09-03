@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/03 14:28:25 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/03 14:51:34 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,14 @@ static void	ft_set_c(char **fragments, int i, t_letters *let)
 		let->c += atof(fragments[i - 2]);
 }
 
+static void	ft_set_d(char **fragments, int i, t_letters *let)
+{
+	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
+		let->d = let->d - atof(fragments[i - 2]);
+	else
+		let->d += atof(fragments[i - 2]);
+}
+
 static void	ft_set_a_(char **fragments, int i, t_letters *let)
 {
 	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
@@ -101,6 +109,16 @@ static void	ft_set_c_(char **fragments, int i, t_letters *let)
 	}
 }
 
+static void	ft_set_d_(char **fragments, int i, t_letters *let)
+{
+	if (fragments[i - 3] && ft_strncmp(fragments[i -3], "-", 1) == 0)
+		let->d += atof(fragments[i - 2]);
+	else
+	{
+		let->d = let->d - atof(fragments[i - 2]);
+	}
+}
+
 void	ft_set_negative(t_letters *let, char **str)
 {
 	int	i;
@@ -108,6 +126,8 @@ void	ft_set_negative(t_letters *let, char **str)
 	i = 0;
 	while (str[i])
 	{
+		if (ft_strncmp(str[i], "X^3", 3) == 0)
+			ft_set_d_(str, i, let);
 		if (ft_strncmp(str[i], "X^2", 3) == 0)
 			ft_set_a_(str, i, let);
 		else if (ft_strncmp(str[i], "X^1", 3) == 0)
@@ -126,6 +146,8 @@ void	ft_set_positive(t_letters *let, char **str)
 	i = 0;
 	while (str[i])
 	{
+		if (ft_strncmp(str[i], "X^3", 3) == 0)
+			ft_set_d(str, i, let);
 		if (ft_strncmp(str[i], "X^2", 3) == 0)
 			ft_set_a(str, i, let);
 		else if (ft_strncmp(str[i], "X^1", 3) == 0)
