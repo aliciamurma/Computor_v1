@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:39:15 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/03 14:44:17 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:21:31 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,15 @@
 
 typedef struct	s_letters
 {
-	double	a;
-	double	b;
-	double	c;
-	double	d;
+	double	*degree;
+	int		len;
 }	t_letters;
 
-void	ft_seet_initial_letters(t_letters *let);
-void	ft_set_letters(t_letters *let, char **argv);
+void	ft_set_initial_letters(t_letters *let, char *input);
+void	ft_set_letters(t_letters *let, char *input);
 int		ft_get_exponential(char *str);
-int		ft_get_degree(char **argv);
-void	ft_check_errors(char **argv);
+int		ft_get_degree(t_letters let);
+void	ft_check_errors(char *input);
 void	ft_third_degree(t_letters let);
 
 /*	UTILS	*/
@@ -43,5 +41,6 @@ int		ft_strncmp( char *s1,  char *s2, int n);
 char	*ft_substr(char *s, int start, int len);
 int		ft_strlen( char *str);
 void	ft_free(char **str);
+char	*ft_trim(char *s);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/11 12:36:39 by amurcia-          #+#    #+#              #
-#    Updated: 2023/09/03 14:44:40 by amurcia-         ###   ########.fr        #
+#    Updated: 2023/09/09 19:21:18 by amurcia-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,15 +28,16 @@ NAME_B 			= computor_v1_bonus
 MAIN			= main.c
 GETTERS			= getters.c
 SETTERS			= setters.c
-SRC_UTILS 		= ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c ft_free.c ft_free_zeros.c
-SRC		 		= $(SRC_UTILS) $(SETTERS) $(GETTERS)
+ERRORS			= check.c
+SRC_UTILS 		= ft_split.c ft_strlen.c ft_strncmp.c ft_substr.c ft_free.c ft_free_zeros.c ft_trim.c
+SRC		 		= $(SRC_UTILS) $(SETTERS) $(GETTERS) $(ERRORS)
 # SOURCES_BONUS
 MAIN_B				= main_bonus.c
 GETTERS_B			= getters_bonus.c
 SETTERS_B			= setters_bonus.c
 ERRORS				= check_bonus.c
 THIRD				= third_degree_bonus.c
-SRC_UTILS_B 		= ft_split_bonus.c ft_strlen_bonus.c ft_strncmp_bonus.c ft_substr_bonus.c ft_free_bonus.c ft_free_zeros_bonus.c
+SRC_UTILS_B 		= ft_split_bonus.c ft_strlen_bonus.c ft_strncmp_bonus.c ft_substr_bonus.c ft_free_bonus.c ft_free_zeros_bonus.c ft_trim_bonus.c
 SRC_B		 		= $(SRC_UTILS_B) $(SETTERS_B) $(GETTERS_B) $(ERRORS) $(THIRD)
 
 # FOLDERS
@@ -125,6 +126,12 @@ run5: all
 
 run6: all
 	@./$(BIN) "6 * X^0 + 11 * X^1 - 5 * X^2 = 1 * X^0 + 1 * X^1"
+
+run7: all
+	@./$(BIN) "5 * X^0 + 3 * X^1 + 5 * X^5 = 1 * X^0 + 0 * X^1 + 5 * X^5"
+
+run8: all
+	@./$(BIN) "5 * X^0 = 4 * X^0 + 7 * X^1"
 
 leaks: $(BIN)
 	@leaks -atExit -- ./$(BIN) "5 * X^0 + 4 * X^1 - 9.3 * X^2 = 1 * X^0"
