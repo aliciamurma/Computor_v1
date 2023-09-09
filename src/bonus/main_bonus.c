@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 00:05:55 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 00:11:06 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,10 +87,21 @@ void	ft_second_degree(t_letters let)
 		free(root2);
 }
 
+/**
+ * @brief Fix a first degree equation
+ * 
+ * @param let 
+ */
 void	ft_first_degree(t_letters let)
 {
 	char	*result;
 
+	result = ft_take_zeros(- let.degree[0]);
+	printf("To solve a second degree function, we will follow the equation -b/c\n%s / ", result);
+	free(result);
+	result = ft_take_zeros(let.degree[1]);
+	printf("%s\n", result);
+	free(result);
 	result = ft_take_zeros(- let.degree[0] / let.degree[1]);
 	printf("The solution is: %s\n", result);
 	free(result);
