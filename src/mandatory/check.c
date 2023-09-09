@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:23:19 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 18:33:27 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:05:26 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,9 @@ static void ft_check_spaces(char *input)
 void    ft_check_errors(char *input)
 {
     ft_check_spaces(input);
-    printf("1\n");
     ft_between_digit(input);
-    printf("2\n");
     ft_one_dot(input);
-    printf("3\n");
     ft_alone_dots(input);
-    printf("4\n");
     ft_check_equal(input);
 }
+

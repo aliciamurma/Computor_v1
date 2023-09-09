@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 19:09:59 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:05:13 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,11 @@ void	ft_second_degree(t_letters let)
 	}
 }
 
+/**
+ * @brief Fix for first degree
+ * 
+ * @param let 
+ */
 void	ft_first_degree(t_letters let)
 {
 	double	result;
@@ -46,6 +51,12 @@ void	ft_first_degree(t_letters let)
 	printf("The solution is: %s\n", ft_take_zeros(result));
 }
 
+/**
+ * @brief Classify in functions depending on the degree
+ * 
+ * @param let 
+ * @param degree 
+ */
 void	ft_classify(t_letters let, int degree)
 {
 	if (degree == 2)
@@ -62,25 +73,40 @@ void	ft_classify(t_letters let, int degree)
 void	ft_reduced_form(t_letters let)
 {
 	int	i;
+	int	zero;
 	printf("Reduced form: ");
 
 	i = 0;
+	if (let.degree[i] < 0)
+		printf("- ");
 	while(let.degree[i])
 	{
+		zero = 0;
 		if (let.degree[i] != 0)
-			printf("%s * X^%d ", ft_take_zeros(fabs(let.degree[i])), i);
-		i++;
-		if (let.degree[i] && let.degree[i] != 0)
 		{
-			if (let.degree[i] > 0  && let.degree[i -1] > 0)
+			printf("%s * X^%d ", ft_take_zeros(fabs(let.degree[i])), i);
+			zero = 1;
+		}
+		i++;
+		if (let.degree[i] && zero == 1)
+		{
+			if (let.degree[i] > 0  && let.degree[i -1] != 0)
 				printf("+ ");
 			else
 				printf("- ");
 		}
 	}
+	if (let.len == 1)
+		printf("0 ");
 	printf("= 0\n\n");
 }
 
+/**
+ * @brief Print the degree. Special cases for degree = 0
+ * 
+ * @param degree 
+ * @param let 
+ */
 void	ft_print_degree(int degree, t_letters *let)
 {
 	if (degree == 0 && let->degree[0] == 0)
@@ -113,7 +139,7 @@ int	main(int argc, char **argv)
 		return(-1);
 	}
 	input = ft_trim(argv[1]);
-	// ft_check_errors(input);
+	ft_check_errors(input);
 	ft_set_initial_letters(&letter, input);
 	ft_set_letters(&letter, input);
 	ft_reduced_form(letter);

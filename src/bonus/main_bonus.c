@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 19:05:00 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 21:03:57 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,17 @@ int	ft_mcd(int a, int b)
     return (a);
 }
 
-/**
- * @brief Convert a double into a fraction by maximo comun divisor
- * 
- * @param root 
- */
-void	ft_fraction(double root)
+void	ft_fraction(double num, double denom)
 {
-	int	num;
-	int	denom;
 	int	mcd;
 
-	num = (int)(root + 1000000);
-	denom = 1000000;
-	mcd = ft_mcd(num, denom);
-	num /= mcd;
-	denom /= mcd;
-	printf("The fraction is: %d/%d\n", num, denom);
+	// if (num == (int)num && denom == (int)denom)
+	{
+		mcd = ft_mcd(num, denom);
+		num /= mcd;
+		denom /= mcd;
+		printf("The fraction is: %s/%s\n", ft_take_zeros(num), ft_take_zeros(denom));
+	}
 }
 
 void	ft_second_degree(t_letters let)
@@ -56,17 +50,22 @@ void	ft_second_degree(t_letters let)
 		root1 = (-let.degree[1] + sqrt(discriminant)) / (2 * let.degree[2]);
 		root2 = (-let.degree[1] - sqrt(discriminant)) / (2 * let.degree[2]);
 		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", ft_take_zeros(root1), ft_take_zeros(root2));
+		ft_fraction(-let.degree[1] + sqrt(discriminant), 2 * let.degree[2]);
+		ft_fraction(-let.degree[1] - sqrt(discriminant), 2 * let.degree[2]);
 	}
 	else if (discriminant == 0)
 	{
 		root1 = - let.degree[1] / (2 * let.degree[2]);
 		printf("The solution is: \n%s\n", ft_take_zeros(root1));
+		ft_fraction(-let.degree[1], 2 * let.degree[2]);
 	}
 	else
 	{
 		root1 = - let.degree[1]/ (2 * let.degree[2]);
 		root2 = sqrt(- discriminant) / (2 * let.degree[2]);
 		printf("Discriminant is strictly negative, the solution is:\nReal: %s\nImaginary: %s * i\n", ft_take_zeros(root1), ft_take_zeros(root2));
+		ft_fraction(- let.degree[1], 2 * let.degree[2]);
+		ft_fraction(sqrt(- discriminant), 2 * let.degree[2]);
 	}
 }
 
@@ -80,8 +79,6 @@ void	ft_first_degree(t_letters let)
 
 void	ft_classify(t_letters let, int degree)
 {
-	if (degree == 3)
-		ft_third_degree(let);
 	if (degree == 2)
 		ft_second_degree(let);
 	if (degree == 1)
@@ -96,22 +93,31 @@ void	ft_classify(t_letters let, int degree)
 void	ft_reduced_form(t_letters let)
 {
 	int	i;
+	int	zero;
 	printf("Reduced form: ");
 
 	i = 0;
+	if (let.degree[i] < 0)
+		printf("- ");
 	while(let.degree[i])
 	{
+		zero = 0;
 		if (let.degree[i] != 0)
-			printf("%s * X^%d ", ft_take_zeros(fabs(let.degree[i])), i);
-		i++;
-		if (let.degree[i] && let.degree[i] != 0)
 		{
-			if (let.degree[i] > 0  && let.degree[i -1] > 0)
+			printf("%s * X^%d ", ft_take_zeros(fabs(let.degree[i])), i);
+			zero = 1;
+		}
+		i++;
+		if (let.degree[i] && zero == 1)
+		{
+			if (let.degree[i] > 0  && let.degree[i -1] != 0)
 				printf("+ ");
 			else
 				printf("- ");
 		}
 	}
+	if (let.len == 1)
+		printf("0 ");
 	printf("= 0\n\n");
 }
 
@@ -127,7 +133,7 @@ void	ft_print_degree(int degree, t_letters *let)
 		printf("No posible solution\n");
 		exit(1);
 	}
-	if (degree > 3)
+	if (degree > 2)
 	{
 		printf("Polynomial degree: %d\nThe polynomial degree is strictly greater than 2, I can't solve.\n", degree);
 		exit(-1);
