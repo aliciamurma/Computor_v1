@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/03 14:33:17 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:55:04 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,15 +50,16 @@ void	ft_second_degree(t_letters let)
 	double	root1;
 	double	root2;
 
-	printf("To solve a second degree function, we will follow the equation: -b +- sqrt(-4*b*c)/(2*a) : -%s +- sqrt(-4 * %s * %s)/(2 * %s)\n", ft_take_zeros(let.b), ft_take_zeros(let.b), ft_take_zeros(let.c), ft_take_zeros(let.a));
+	printf("To solve a second degree function, we will follow the equation: -b +- sqrt(-4*b*c)/(2*a)\n");
+	printf("-%s +- sqrt(-4 * %s * %s)/(2 * %s)\n", ft_take_zeros(let.b), ft_take_zeros(let.b), ft_take_zeros(let.c), ft_take_zeros(let.a));
 	discriminant = let.b * let.b -4 * let.a * let.c;
 	if (discriminant > 0)
 	{
 		root1 = (-let.b + sqrt(discriminant)) / (2 * let.a);
 		root2 = (-let.b - sqrt(discriminant)) / (2 * let.a);
 		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", ft_take_zeros(root1), ft_take_zeros(root2));
-		ft_fraction(root1);
 		ft_fraction(root2);
+		ft_fraction(root1);
 	}
 	else if (discriminant == 0)
 	{
@@ -156,6 +157,7 @@ int	main(int argc, char **argv)
 	ft_reduced_form(letter);
 	degree = ft_get_degree(argv);
 	ft_correct_degree(degree, &letter);	
+	degree = ft_get_true_degree(letter);
 	printf("Polynomial degree: %d\n\n", degree);
 	ft_classify(letter, degree);
 }

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/03 13:24:05 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:18:59 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,9 +108,6 @@ void	ft_set_letters(t_letters *let, char **argv)
 	ft_set_positive(let, ft_split(equal[0], ' '));
 	ft_set_negative(let, ft_split(equal[1], ' '));
 	ft_free(equal);
-		printf("a: %lf\n", let->a);
-	printf("b: %lf\n", let->b);
-	printf("c: %lf\n", let->c);
 }
 
 void	ft_seet_initial_letters(t_letters *let)

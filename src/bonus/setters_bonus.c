@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/03 14:51:34 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 16:18:43 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -229,4 +229,5 @@ void	ft_seet_initial_letters(t_letters *let)
 	let->a = 0;
 	let->b = 0;
 	let->c = 0;
+	let->d = 0;
 }
