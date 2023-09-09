@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/09 16:23:19 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 16:23:35 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 18:33:27 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,72 +18,72 @@ static void ft_error(char *str)
     exit(-1);
 }
 
-static void ft_alone_dots(char **argv)
+static void ft_alone_dots(char *input)
 {
     int i;
 
     i = 0;
-    while (argv[1][i])
+    while (input[i])
     {
-        if (argv[1][i] == '.')
+        if (input[i] == '.')
         {
             if (i == 0)
                 ft_error("What dot you mean?");
-            if (i > 0 && !isdigit(argv[1][i -1]))
+            if (i > 0 && !isdigit(input[i -1]))
                 ft_error("What dot you mean?");
-            if (argv[1][i + 1] && !isdigit(argv[1][i + 1]))
+            if (input[i + 1] && !isdigit(input[i + 1]))
                 ft_error("What dot you mean?");
         }
         i++;
     }
 }
 
-static void ft_one_dot(char **argv)
+static void ft_one_dot(char *input)
 {
     int i;
 
     i = 0;
-    while (argv[1][i])
+    while (input[i])
     {
-        if (isdigit(argv[1][i]))
+        if (isdigit(input[i]))
         {
-            while  (argv[1][i] && argv[1][i] != '.')
+            while  (input[i] && input[i] != '.')
                 i++;
             i++;
-            while  (argv[1][i] && isdigit(argv[1][i]))
+            while  (input[i] && isdigit(input[i]))
                 i++;
-            if (argv[1][i] == '.')
+            if (input[i] == '.')
                 ft_error("What is that number????");
         }
         i++;
     }
 }
 
-static void ft_between_digit(char **argv)
+static void ft_between_digit(char *input)
 {
     int i;
 
     i = 0;
-    while (argv[1][i])
+    while (input[i])
     {
-        if (isdigit(argv[1][i]) && i > 0 && (!isdigit(argv[1][i - 1]) && argv[1][i - 1] != ' ' && argv[1][i - 1] != '.' && argv[1][i - 1] != '^'))
+        if (isdigit(input[i]) && i > 0 && (!isdigit(input[i - 1]) && input[i - 1] != ' ' && input[i - 1] != '.' && input[i - 1] != '^'))
             ft_error("What is before the numbers?");
-        if (isdigit(argv[1][i]) && argv[1][i +1] && (!isdigit(argv[1][i + 1]) && argv[1][i + 1] != ' ' && argv[1][i + 1] != '.' && argv[1][i + 1] != '^'))
+        if (isdigit(input[i]) && input[i +1] && (!isdigit(input[i + 1]) && input[i + 1] != ' ' && input[i + 1] != '.' && input[i + 1] != '^'))
             ft_error("What is before the numbers?");
         i++;
     }
 }
 
-static void ft_check_equal(char **argv)
+static void ft_check_equal(char *input)
 {
     int i;
     int equal;
 
     i = 0;
     equal = 0;
-    while (argv[1][i])
+    while (input[i])
     {
-        if (argv[1][i] == '=')
+        if (input[i] == '=')
             equal++;
         i++;
     }
@@ -91,33 +91,37 @@ static void ft_check_equal(char **argv)
         ft_error("Please provide only one =");
 }
 
-static void ft_check_spaces(char **argv)
+static void ft_check_spaces(char *input)
 {
     int i;
 
     i = 0;
-    while (argv[1][i])
+    while (input[i])
     {
-        if (!isdigit(argv[1][i]) && argv[1][i] != '+' && argv[1][i] != '-' && argv[1][i] != 'X' && argv[1][i] != '*' && argv[1][i] != '^' && argv[1][i] != '.' && argv[1][i] != '=' && argv[1][i] != ' ')
+        if (!isdigit(input[i]) && input[i] != '+' && input[i] != '-' && input[i] != 'X' && input[i] != '*' && input[i] != '^' && input[i] != '.' && input[i] != '=' && input[i] != ' ')
             ft_error("Invalid character");
-        if (argv[1][i] == '-' || argv[1][i] == '+' || argv[1][i] == '*')
+        if (input[i] == '-' || input[i] == '+' || input[i] == '*')
         {
-            if (i != 0 && argv[1][i - 1] != ' ')
+            if (i != 0 && input[i - 1] != ' ')
                 ft_error("It seems that you need to add spaces before the sign");
-            if (argv[1][i + 1] && argv[1][i + 1] != ' ')
+            if (input[i + 1] && input[i + 1] != ' ')
                 ft_error("It seems that you need to add spaces after the sign");
         }
-        if (argv[1][i] == 'X' && i != 0 && argv[1][i -1] != ' ')
+        if (input[i] == 'X' && i != 0 && input[i -1] != ' ')
             ft_error("It seems that you need to add spaces near the X");
         i++;
     }
 }
 
-void    ft_check_errors(char **argv)
+void    ft_check_errors(char *input)
 {
-    ft_check_spaces(argv);
-    ft_between_digit(argv);
-    ft_one_dot(argv);
-    ft_alone_dots(argv);
-    ft_check_equal(argv);
+    ft_check_spaces(input);
+    printf("1\n");
+    ft_between_digit(input);
+    printf("2\n");
+    ft_one_dot(input);
+    printf("3\n");
+    ft_alone_dots(input);
+    printf("4\n");
+    ft_check_equal(input);
 }

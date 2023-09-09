@@ -6,38 +6,24 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:23 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 16:55:18 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/09 19:15:02 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/bonus/computor_bonus.h"
 
-int	ft_get_true_degree(t_letters let)
-{
-	if (let.a != 0)
-		return (2);
-	if (let.b != 0)
-		return (1);
-	return (0);
-}
-
-int	ft_get_degree(char **argv)
+int	ft_get_degree(t_letters let)
 {
 	int	i;
-	int	x;
 
-	i = 0;
-	x = 0;
-	while (argv[1][i])
+	i = let.len;
+	while (i > -1)
 	{
-		if (argv[1][i] == 'X' && argv[1][i + 2])
-		{
-			if (x < atoi(&argv[1][i + 2]))
-				x = atoi(&argv[1][i + 2]);
-		}
-		i++;
+		if (let.degree[i] != 0)
+			return (i);
+		i--;
 	}
-	return (x);
+	return (0);
 }
 
 int	ft_get_exponential(char *str)

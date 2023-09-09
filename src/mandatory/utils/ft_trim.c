@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   getters.c                                          :+:      :+:    :+:   */
+/*   ft_trim.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/01 20:23:23 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 18:42:09 by amurcia-         ###   ########.fr       */
+/*   Created: 2023/09/09 18:23:39 by amurcia-          #+#    #+#             */
+/*   Updated: 2023/09/09 19:19:52 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../inc/mandatory/computor.h"
+#include "../../../inc/mandatory/computor.h"
 
-int	ft_get_degree(t_letters let)
+static char *ft_ltrim(char *s)
 {
-	int	i;
-
-	i = let.len;
-	while (i > -1)
-	{
-		if (let.degree[i] != 0)
-			return (i);
-		i--;
-	}
-	return (0);
+    while(isspace(*s))
+        s++;
+    return s;
 }
 
-int	ft_get_exponential(char *str)
+static char *ft_rtrim(char *s)
 {
-	int	i;
+    char    *back;
+    
+    back = s + strlen(s);
+    while(isspace(*--back));
+    *(back+1) = '\0';
+    return s;
+}
 
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] && str[i++] && str[i] == '^')
-			return (str[i++]);
-		i++;
-	}
-	return (0);
+char    *ft_trim(char *s)
+{
+    char    *str;
+
+    str = ft_ltrim(s);
+    return ft_rtrim(str); 
 }
