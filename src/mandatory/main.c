@@ -6,57 +6,54 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 21:05:13 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 00:05:49 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/mandatory/computor.h"
 
+
 void	ft_second_degree(t_letters let)
 {
 	double	discriminant;
-	double	root1;
-	double	root2;
+	char	*root1;
+	char	*root2;
 
+	root1 = NULL;
+	root2 = NULL;
 	discriminant = let.degree[1] * let.degree[1] -4 * let.degree[2] * let.degree[0];
 	if (discriminant > 0)
 	{
-		root1 = (-let.degree[1] + sqrt(discriminant)) / (2 * let.degree[2]);
-		root2 = (-let.degree[1] - sqrt(discriminant)) / (2 * let.degree[2]);
-		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", ft_take_zeros(root1), ft_take_zeros(root2));
+		root1 = ft_take_zeros((-let.degree[1] + sqrt(discriminant)) / (2 * let.degree[2]));
+		root2 = ft_take_zeros((-let.degree[1] - sqrt(discriminant)) / (2 * let.degree[2]));
+		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", root1, root2);
 	}
 	else if (discriminant == 0)
 	{
-		root1 = - let.degree[1] / (2 * let.degree[2]);
-		printf("The solution is: \n%s\n", ft_take_zeros(root1));
+		root1 = ft_take_zeros(- let.degree[1] / (2 * let.degree[2]));
+		printf("The solution is: \n%s\n", root1);
 	}
 	else
 	{
-		root1 = - let.degree[1]/ (2 * let.degree[2]);
-		root2 = sqrt(- discriminant) / (2 * let.degree[2]);
-		printf("Discriminant is strictly negative, the solution is:\nReal: %s\nImaginary: %s * i\n", ft_take_zeros(root1), ft_take_zeros(root2));
+		root1 = ft_take_zeros(- let.degree[1]/ (2 * let.degree[2]));
+		root2 = ft_take_zeros(sqrt(- discriminant) / (2 * let.degree[2]));
+		printf("Discriminant is strictly negative, the solution is:\nReal: %s\nImaginary: %s * i\n", root1, root2);
 	}
+	if (root1)
+		free(root1);
+	if (root2)
+		free(root2);
 }
 
-/**
- * @brief Fix for first degree
- * 
- * @param let 
- */
 void	ft_first_degree(t_letters let)
 {
-	double	result;
+	char	*result;
 
-	result = - let.degree[0] / let.degree[1];
-	printf("The solution is: %s\n", ft_take_zeros(result));
+	result = ft_take_zeros(- let.degree[0] / let.degree[1]);
+	printf("The solution is: %s\n", result);
+	free(result);
 }
 
-/**
- * @brief Classify in functions depending on the degree
- * 
- * @param let 
- * @param degree 
- */
 void	ft_classify(t_letters let, int degree)
 {
 	if (degree == 2)
@@ -72,8 +69,9 @@ void	ft_classify(t_letters let, int degree)
  */
 void	ft_reduced_form(t_letters let)
 {
-	int	i;
-	int	zero;
+	int		i;
+	int		zero;
+	char	*nbr;
 	printf("Reduced form: ");
 
 	i = 0;
@@ -84,8 +82,10 @@ void	ft_reduced_form(t_letters let)
 		zero = 0;
 		if (let.degree[i] != 0)
 		{
-			printf("%s * X^%d ", ft_take_zeros(fabs(let.degree[i])), i);
+			nbr = ft_take_zeros(fabs(let.degree[i]));
+			printf("%s * X^%d ", nbr, i);
 			zero = 1;
+			free(nbr);
 		}
 		i++;
 		if (let.degree[i] && zero == 1)
@@ -96,17 +96,11 @@ void	ft_reduced_form(t_letters let)
 				printf("- ");
 		}
 	}
-	if (let.len == 1)
+	if (let.len == 1 && let.degree[0] == 0)
 		printf("0 ");
 	printf("= 0\n\n");
 }
 
-/**
- * @brief Print the degree. Special cases for degree = 0
- * 
- * @param degree 
- * @param let 
- */
 void	ft_print_degree(int degree, t_letters *let)
 {
 	if (degree == 0 && let->degree[0] == 0)

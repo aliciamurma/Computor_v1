@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 21:03:57 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 00:05:55 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,54 +27,73 @@ int	ft_mcd(int a, int b)
 
 void	ft_fraction(double num, double denom)
 {
-	int	mcd;
+	int		mcd;
+	char	*nbr1;
+	char	*nbr2;
 
 	// if (num == (int)num && denom == (int)denom)
 	{
 		mcd = ft_mcd(num, denom);
 		num /= mcd;
 		denom /= mcd;
-		printf("The fraction is: %s/%s\n", ft_take_zeros(num), ft_take_zeros(denom));
+		nbr1 = ft_take_zeros(num);
+		nbr2 = ft_take_zeros(denom);
+		printf("The fraction is: %s/%s\n", nbr1, nbr2);
+		free(nbr1);
+		free(nbr2);
 	}
 }
 
 void	ft_second_degree(t_letters let)
 {
 	double	discriminant;
-	double	root1;
-	double	root2;
+	char	*root1;
+	char	*root2;
 
 	discriminant = let.degree[1] * let.degree[1] -4 * let.degree[2] * let.degree[0];
+	root1 = ft_take_zeros(let.degree[1]);
+	printf("To solve a second degree function, we will follow the equation: -b +- sqrt(-4*b*c)/(2*a)\n : -%s +- sqrt(-4 * %s", root1, root1);
+	free(root1);
+	root1 = ft_take_zeros(let.degree[2]);
+	root2 = ft_take_zeros(let.degree[0]);
+	printf(" * %s)/(2 * %s)\n", root1, root2);
+	free(root1);
+	free(root2);
 	if (discriminant > 0)
 	{
-		root1 = (-let.degree[1] + sqrt(discriminant)) / (2 * let.degree[2]);
-		root2 = (-let.degree[1] - sqrt(discriminant)) / (2 * let.degree[2]);
-		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", ft_take_zeros(root1), ft_take_zeros(root2));
+		root1 = ft_take_zeros((-let.degree[1] + sqrt(discriminant)) / (2 * let.degree[2]));
+		root2 = ft_take_zeros((-let.degree[1] - sqrt(discriminant)) / (2 * let.degree[2]));
+		printf("Discriminant is strictly positive, the two solutions are:\n%s \n%s\n", root1, root2);
 		ft_fraction(-let.degree[1] + sqrt(discriminant), 2 * let.degree[2]);
 		ft_fraction(-let.degree[1] - sqrt(discriminant), 2 * let.degree[2]);
 	}
 	else if (discriminant == 0)
 	{
-		root1 = - let.degree[1] / (2 * let.degree[2]);
-		printf("The solution is: \n%s\n", ft_take_zeros(root1));
+		root1 = ft_take_zeros(- let.degree[1] / (2 * let.degree[2]));
+		printf("The solution is: \n%s\n", root1);
 		ft_fraction(-let.degree[1], 2 * let.degree[2]);
 	}
 	else
 	{
-		root1 = - let.degree[1]/ (2 * let.degree[2]);
-		root2 = sqrt(- discriminant) / (2 * let.degree[2]);
-		printf("Discriminant is strictly negative, the solution is:\nReal: %s\nImaginary: %s * i\n", ft_take_zeros(root1), ft_take_zeros(root2));
+		root1 = ft_take_zeros(- let.degree[1]/ (2 * let.degree[2]));
+		root2 = ft_take_zeros(sqrt(- discriminant) / (2 * let.degree[2]));
+		printf("Discriminant is strictly negative, the solution is:\nReal: %s\nImaginary: %s * i\n", root1, root2);
 		ft_fraction(- let.degree[1], 2 * let.degree[2]);
 		ft_fraction(sqrt(- discriminant), 2 * let.degree[2]);
 	}
+	if (root1)
+		free(root1);
+	if (root2)
+		free(root2);
 }
 
 void	ft_first_degree(t_letters let)
 {
-	double	result;
+	char	*result;
 
-	result = - let.degree[0] / let.degree[1];
-	printf("The solution is: %s\n", ft_take_zeros(result));
+	result = ft_take_zeros(- let.degree[0] / let.degree[1]);
+	printf("The solution is: %s\n", result);
+	free(result);
 }
 
 void	ft_classify(t_letters let, int degree)
@@ -92,8 +111,9 @@ void	ft_classify(t_letters let, int degree)
  */
 void	ft_reduced_form(t_letters let)
 {
-	int	i;
-	int	zero;
+	int		i;
+	int		zero;
+	char	*nbr;
 	printf("Reduced form: ");
 
 	i = 0;
@@ -104,7 +124,9 @@ void	ft_reduced_form(t_letters let)
 		zero = 0;
 		if (let.degree[i] != 0)
 		{
-			printf("%s * X^%d ", ft_take_zeros(fabs(let.degree[i])), i);
+			nbr = ft_take_zeros(fabs(let.degree[i]));
+			printf("%s * X^%d ", nbr, i);
+			free(nbr);
 			zero = 1;
 		}
 		i++;
@@ -116,7 +138,7 @@ void	ft_reduced_form(t_letters let)
 				printf("- ");
 		}
 	}
-	if (let.len == 1)
+	if (let.len == 1 && let.degree[0] == 0)
 		printf("0 ");
 	printf("= 0\n\n");
 }
@@ -160,4 +182,5 @@ int	main(int argc, char **argv)
 	degree = ft_get_degree(letter);
 	ft_print_degree(degree, &letter);	
 	ft_classify(letter, degree);
+	free(letter.degree);
 }
