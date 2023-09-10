@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 00:11:06 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:34:46 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_fraction(double num, double denom)
 	char	*nbr1;
 	char	*nbr2;
 
-	// if (num == (int)num && denom == (int)denom)
+	if (num == (int)num && denom == (int)denom)
 	{
 		mcd = ft_mcd(num, denom);
 		num /= mcd;
@@ -52,7 +52,7 @@ void	ft_second_degree(t_letters let)
 
 	discriminant = let.degree[1] * let.degree[1] -4 * let.degree[2] * let.degree[0];
 	root1 = ft_take_zeros(let.degree[1]);
-	printf("To solve a second degree function, we will follow the equation: -b +- sqrt(-4*b*c)/(2*a)\n : -%s +- sqrt(-4 * %s", root1, root1);
+	printf("To solve a second degree function, we will follow the equation: \n-b +- sqrt(-4*b*c)/(2*a)\n-%s +- sqrt(-4 * %s", root1, root1);
 	free(root1);
 	root1 = ft_take_zeros(let.degree[2]);
 	root2 = ft_take_zeros(let.degree[0]);
@@ -125,12 +125,13 @@ void	ft_reduced_form(t_letters let)
 	int		i;
 	int		zero;
 	char	*nbr;
+	printf("LEN: %d\n", let.len);
 	printf("Reduced form: ");
 
 	i = 0;
 	if (let.degree[i] < 0)
 		printf("- ");
-	while(let.degree[i])
+	while(i < let.len)
 	{
 		zero = 0;
 		if (let.degree[i] != 0)
@@ -189,6 +190,7 @@ int	main(int argc, char **argv)
 	ft_check_errors(input);
 	ft_set_initial_letters(&letter, input);
 	ft_set_letters(&letter, input);
+	printf("now in pos 2: %lf\n", letter.degree[2]);
 	ft_reduced_form(letter);
 	degree = ft_get_degree(letter);
 	ft_print_degree(degree, &letter);	
