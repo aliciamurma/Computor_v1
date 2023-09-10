@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:23 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 13:20:19 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:48:56 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ int	ft_get_degree(t_letters let)
 {
 	int	i;
 
-	printf("in pos 2: %lf\n", let.degree[2]);
 	i = let.len;
 	while (i > -1)
 	{

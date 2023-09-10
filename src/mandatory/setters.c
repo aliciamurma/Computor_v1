@@ -6,12 +6,11 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 21:05:07 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:50:28 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../inc/mandatory/computor.h"
-
 bool	ft_isdouble(char *str)
 {
 	int	i;
@@ -28,8 +27,8 @@ bool	ft_isdouble(char *str)
 
 static void	ft_set_neg(char **fragments, int i, t_letters *let, int nbr)
 {
-	if ((i > 1 && !ft_isdouble(fragments[i - 2])) || (i > 0 && ft_strncmp(fragments[i - 1], "-", 1) == 0))
-		let->degree[nbr] = let->degree[nbr] + 1;
+	if ((i > 1 && ft_isdouble(fragments[i - 2]) && ft_strncmp(fragments[i - 1], "*", 1) != 0) || (i > 1 && !ft_isdouble(fragments[i - 2])) || (i > 0 && ft_strncmp(fragments[i - 1], "-", 1) == 0))
+		let->degree[nbr] = let->degree[nbr] - 1;
 	else if ((i > 1 && !ft_isdouble(fragments[i - 2])) || i == 0)
 		let->degree[nbr] = let->degree[nbr] - 1;
 	else if (i > 2 && ft_strncmp(fragments[i -3], "-", 1) == 0)
@@ -40,8 +39,8 @@ static void	ft_set_neg(char **fragments, int i, t_letters *let, int nbr)
 
 static void	ft_set_pos(char **fragments, int i, t_letters *let, int nbr)
 {
-	if ((i > 1 && !ft_isdouble(fragments[i - 2])) || (i > 0 && ft_strncmp(fragments[i - 1], "-", 1) == 0))
-		let->degree[nbr] = let->degree[nbr] - 1;
+	if ((i > 1 && ft_isdouble(fragments[i - 2]) && ft_strncmp(fragments[i - 1], "*", 1) != 0) || (i > 1 && !ft_isdouble(fragments[i - 2])) || (i > 0 && ft_strncmp(fragments[i - 1], "-", 1) == 0))
+		let->degree[nbr] = let->degree[nbr] + 1;
 	else if ((i > 1 && !ft_isdouble(fragments[i - 2])) || i == 0)
 		let->degree[nbr] = let->degree[nbr] + 1;
 	else if (i > 2 && ft_strncmp(fragments[i -3], "-", 1) == 0)
@@ -59,6 +58,13 @@ static void	ft_set_negative(t_letters *let, char **str)
 	{
 		if (str[i][0] == 'X' && str[i][1] == '^' && isdigit(str[i][2]))
 			ft_set_neg(str, i, let, str[i][2] - '0');
+		else if (str[i][0] == 'X')
+		{
+			if (i > 1 && ft_isdouble(str[i - 2]))
+				let->degree[1] -= atof(str[i - 2]);
+			else 
+				let->degree[1] -= 1;
+		}
 		i++;
 	}
 	ft_free(str);
@@ -73,12 +79,19 @@ static void	ft_set_positive(t_letters *let, char **str)
 	{
 		if (str[i][0] == 'X' && str[i][1] == '^' && isdigit(str[i][2]))
 			ft_set_pos(str, i, let, str[i][2] - '0');
+		else if (str[i][0] == 'X')
+		{
+			if (i > 1 && ft_isdouble(str[i - 2]))
+				let->degree[1] += atof(str[i - 2]);
+			else 
+				let->degree[1] += 1;
+		}
 		i++;
 	}
 	ft_free(str);
 }
 
-void	ft_set_alone(char *input, t_letters *let)
+void	ft_set_only_nbr(char *input, t_letters *let)
 {
 	char	**frag;
 	int		i;
@@ -91,7 +104,7 @@ void	ft_set_alone(char *input, t_letters *let)
 		if (ft_strncmp(frag[i], "=", 1) == 0 )
 			equal++;
 		if ((ft_isdouble(frag[i]) && !frag[i + 1])
-			|| (ft_isdouble(frag[i]) && frag[i + 2] && frag[i + 2][0] != 'X'))
+			|| (ft_isdouble(frag[i]) && frag[i + 2] && frag[i + 1][0] != '*'))
 		{
 			if (i > 0 && ft_strncmp(frag[i -1], "-", 1) == 0 && equal == 0)
 				let->degree[0] = let->degree[0] - atof(frag[i]);
@@ -121,7 +134,7 @@ void	ft_set_letters(t_letters *let, char *input)
 	i = 0;
 	rep = 0;
 	equal = ft_split(input, '=');
-	ft_set_alone(input, let);
+	ft_set_only_nbr(input, let);
 	ft_set_positive(let, ft_split(equal[0], ' '));
 	ft_set_negative(let, ft_split(equal[1], ' '));
 	ft_free(equal);

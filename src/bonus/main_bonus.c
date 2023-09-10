@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 13:34:46 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:49:31 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	ft_second_degree(t_letters let)
 	free(root1);
 	root1 = ft_take_zeros(let.degree[2]);
 	root2 = ft_take_zeros(let.degree[0]);
-	printf(" * %s)/(2 * %s)\n", root1, root2);
+	printf(" * %s)/(2 * %s)\n\n", root1, root2);
 	free(root1);
 	free(root2);
 	if (discriminant > 0)
@@ -125,9 +125,8 @@ void	ft_reduced_form(t_letters let)
 	int		i;
 	int		zero;
 	char	*nbr;
-	printf("LEN: %d\n", let.len);
-	printf("Reduced form: ");
 
+	printf("Reduced form: ");
 	i = 0;
 	if (let.degree[i] < 0)
 		printf("- ");
@@ -190,7 +189,6 @@ int	main(int argc, char **argv)
 	ft_check_errors(input);
 	ft_set_initial_letters(&letter, input);
 	ft_set_letters(&letter, input);
-	printf("now in pos 2: %lf\n", letter.degree[2]);
 	ft_reduced_form(letter);
 	degree = ft_get_degree(letter);
 	ft_print_degree(degree, &letter);	

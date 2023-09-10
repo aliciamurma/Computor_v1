@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 20:23:17 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 13:44:02 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:48:31 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void	ft_set_only_nbr(char *input, t_letters *let)
 		if (ft_strncmp(frag[i], "=", 1) == 0 )
 			equal++;
 		if ((ft_isdouble(frag[i]) && !frag[i + 1])
-			|| (ft_isdouble(frag[i]) && frag[i + 2] && frag[i + 2][0] != 'X'))
+			|| (ft_isdouble(frag[i]) && frag[i + 2] && frag[i + 1][0] != '*'))
 		{
 			if (i > 0 && ft_strncmp(frag[i -1], "-", 1) == 0 && equal == 0)
 				let->degree[0] = let->degree[0] - atof(frag[i]);

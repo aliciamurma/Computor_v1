@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 00:05:49 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:27:23 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	ft_first_degree(t_letters let)
 	char	*result;
 
 	result = ft_take_zeros(- let.degree[0] / let.degree[1]);
-	printf("The solution is: %s\n", result);
+	printf("The solution is: \n%s\n", result);
 	free(result);
 }
 
@@ -77,7 +77,7 @@ void	ft_reduced_form(t_letters let)
 	i = 0;
 	if (let.degree[i] < 0)
 		printf("- ");
-	while(let.degree[i])
+	while(i < let.len)
 	{
 		zero = 0;
 		if (let.degree[i] != 0)

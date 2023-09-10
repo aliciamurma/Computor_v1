@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 22:56:37 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/02 22:56:50 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 12:59:34 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ char	*ft_take_zeros(double nbr)
 	int len;
 
 	str = malloc(sizeof(char) * 50);
-    snprintf(str, sizeof(str), "%.5lf", nbr);
+    snprintf(str, sizeof(str), "%.10lf", nbr);
     len = strlen(str);
     while (str[len - 1] == '0')
 	{
