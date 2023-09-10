@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 13:49:31 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:09:51 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	ft_second_degree(t_letters let)
 
 	discriminant = let.degree[1] * let.degree[1] -4 * let.degree[2] * let.degree[0];
 	root1 = ft_take_zeros(let.degree[1]);
-	printf("To solve a second degree function, we will follow the equation: \n-b +- sqrt(-4*b*c)/(2*a)\n-%s +- sqrt(-4 * %s", root1, root1);
+	printf("To solve a second degree equation, we will follow the equation: \n-b +- sqrt(-4*b*c)/(2*a)\n-%s +- sqrt(-4 * %s", root1, root1);
 	free(root1);
 	root1 = ft_take_zeros(let.degree[2]);
 	root2 = ft_take_zeros(let.degree[0]);
@@ -96,10 +96,15 @@ void	ft_first_degree(t_letters let)
 {
 	char	*result;
 
-	result = ft_take_zeros(- let.degree[0]);
-	printf("To solve a second degree function, we will follow the equation -b/c\n%s / ", result);
+	result = ft_take_zeros(fabs(- let.degree[0]));
+	printf("To solve a first degree equation, we will follow the formula: \n-b/c\n");
+	if (- let.degree[0] < 0)
+		printf("- ");
+	printf("%s / ", result);
 	free(result);
-	result = ft_take_zeros(let.degree[1]);
+	if (let.degree[1] < 0)
+		printf("- ");
+	result = ft_take_zeros(fabs(let.degree[1]));
 	printf("%s\n", result);
 	free(result);
 	result = ft_take_zeros(- let.degree[0] / let.degree[1]);
@@ -128,11 +133,11 @@ void	ft_reduced_form(t_letters let)
 
 	printf("Reduced form: ");
 	i = 0;
+	zero = 0;
 	if (let.degree[i] < 0)
 		printf("- ");
 	while(i < let.len)
 	{
-		zero = 0;
 		if (let.degree[i] != 0)
 		{
 			nbr = ft_take_zeros(fabs(let.degree[i]));

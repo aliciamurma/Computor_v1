@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 13:27:23 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 13:58:51 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_second_degree(t_letters let)
 	else if (discriminant == 0)
 	{
 		root1 = ft_take_zeros(- let.degree[1] / (2 * let.degree[2]));
-		printf("The solution is: \n%s\n", root1);
+		printf("Discriminant is zero. The solution is: \n%s\n", root1);
 	}
 	else
 	{
@@ -75,11 +75,11 @@ void	ft_reduced_form(t_letters let)
 	printf("Reduced form: ");
 
 	i = 0;
+	zero = 0;
 	if (let.degree[i] < 0)
 		printf("- ");
 	while(i < let.len)
 	{
-		zero = 0;
 		if (let.degree[i] != 0)
 		{
 			nbr = ft_take_zeros(fabs(let.degree[i]));
