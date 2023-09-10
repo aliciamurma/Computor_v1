@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 14:09:51 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:14:45 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	ft_mcd(int a, int b)
 void	ft_fraction(double num, double denom)
 {
 	int		mcd;
+	int		i;
 	char	*nbr1;
 	char	*nbr2;
 
@@ -41,6 +42,15 @@ void	ft_fraction(double num, double denom)
 		printf("The fraction is: %s/%s\n", nbr1, nbr2);
 		free(nbr1);
 		free(nbr2);
+	}
+	else
+	{
+		while (num != (int)num && denom != (int)denom && i < 1000)
+		{
+			num = num * 10;
+			denom = denom * 10;
+			mcd++;
+		}
 	}
 }
 
@@ -105,7 +115,7 @@ void	ft_first_degree(t_letters let)
 	if (let.degree[1] < 0)
 		printf("- ");
 	result = ft_take_zeros(fabs(let.degree[1]));
-	printf("%s\n", result);
+	printf("%s\n\n", result);
 	free(result);
 	result = ft_take_zeros(- let.degree[0] / let.degree[1]);
 	printf("The solution is: %s\n", result);
