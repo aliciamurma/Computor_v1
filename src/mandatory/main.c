@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/01 19:06:21 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 13:58:51 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:28:03 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ void	ft_print_degree(int degree, t_letters *let)
 	}
 	if (degree == 0 && let->degree[0] != 0)
 	{
-		printf("No posible solution\n");
+		printf("No possible solution\n");
 		exit(1);
 	}
 	if (degree > 2)

@@ -6,7 +6,7 @@
 #    By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/07/11 12:36:39 by amurcia-          #+#    #+#              #
-#    Updated: 2023/09/09 21:00:52 by amurcia-         ###   ########.fr        #
+#    Updated: 2023/09/10 14:47:29 by amurcia-         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,9 +20,9 @@ FLAGS  = -Wextra -Wall -Werror
 DEPFLAGS = -MMD -MF
 
 # NAME
-NAME 			= computor_v1
+NAME 			= computor
 # NAME_BONUS
-NAME_B 			= computor_v1_bonus
+NAME_B 			= computor_bonus
 
 # SOURCES
 MAIN			= main.c
@@ -55,6 +55,7 @@ INC_B				= $(addprefix -I , $(INCLUDES_B))
 OBJ_MAIN		= $(addprefix $(OBJ_DIR)/, $(MAIN:.c=.o))
 OBJ_SRC			= $(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
 OBJ				= $(OBJ_MAIN) $(OBJ_SRC)
+
 # OBJECTS_BONUS
 OBJ_MAIN_B		= $(addprefix $(OBJ_DIR)/, $(MAIN_B:.c=.o))
 OBJ_SRC_B			= $(addprefix $(OBJ_DIR)/, $(SRC_B:.c=.o))
@@ -111,6 +112,9 @@ run1: all
 
 run1b: all
 	@./$(BIN_B) "5 - 1 + 4 * X^1 - 9.3 * X^2 = 0"
+
+run2b: all
+	@./$(BIN_B) "5 + 4 * X + X^2 = X^2"
 
 run2: all
 	@./$(BIN) "5 * X^0 + 4 * X^1 = 4 * X^0"

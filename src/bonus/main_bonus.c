@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:08:13 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/10 14:14:45 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:50:20 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,20 @@ void	ft_fraction(double num, double denom)
 	}
 	else
 	{
-		while (num != (int)num && denom != (int)denom && i < 1000)
+		i =  0;
+		while ((num != (int)num || denom != (int)denom) && i < 1000)
 		{
 			num = num * 10;
 			denom = denom * 10;
-			mcd++;
+			i++;
 		}
+		if (i == 1000)
+			return ;
+		nbr1 = ft_take_zeros(num);
+		nbr2 = ft_take_zeros(denom);
+		printf("The fraction is: %s/%s\n", nbr1, nbr2);
+		free(nbr1);
+		free(nbr2);
 	}
 }
 
@@ -178,7 +186,7 @@ void	ft_print_degree(int degree, t_letters *let)
 	}
 	if (degree == 0 && let->degree[0] != 0)
 	{
-		printf("No posible solution\n");
+		printf("No possible solution\n");
 		exit(1);
 	}
 	if (degree > 2)
@@ -194,14 +202,20 @@ int	main(int argc, char **argv)
 	t_letters	letter;
 	int			degree;
 	char		*input;
+	char		*flag;
 
-	if (argc != 2)
+	if (argc != 3)
 	{
 		printf("Error in number of arguments\n");
+		printf("Please, enter a polynomial equation as first argument\n");
+		printf("Please, enter \"Y\" in case you want to check also the spaces.\n");
+		printf("Please, enter \"N\" in case you don't want to check the spaces.\n");
 		return(-1);
 	}
+	flag = ft_trim(argv[2]);
+	
 	input = ft_trim(argv[1]);
-	ft_check_errors(input);
+	ft_check_errors(input, flag);
 	ft_set_initial_letters(&letter, input);
 	ft_set_letters(&letter, input);
 	ft_reduced_form(letter);

@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 20:49:45 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 19:18:38 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:53:31 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static void ft_one_dot(char *input)
     }
 }
 
-static void ft_between_digit(char *input)
+void ft_between_digit(char *input)
 {
     int i;
 
@@ -91,7 +91,7 @@ static void ft_check_equal(char *input)
         ft_error("Please provide only one =");
 }
 
-static void ft_check_spaces(char *input)
+void ft_check_spaces(char *input)
 {
     int i;
 
@@ -113,10 +113,15 @@ static void ft_check_spaces(char *input)
     }
 }
 
-void    ft_check_errors(char *input)
+void    ft_check_errors(char *input, char *flag)
 {
-    ft_check_spaces(input);
-    ft_between_digit(input);
+    if (ft_strncmp(flag, "Y", 2) != 0 && ft_strncmp(flag, "N", 2) != 0)
+        ft_error("You have to write \"Y\" or \"N\", please.\n");
+    if (ft_strncmp(flag, "Y", 1) == 0)
+    {
+        ft_check_spaces(input);
+        ft_between_digit(input);
+    }
     ft_one_dot(input);
     ft_alone_dots(input);
     ft_check_equal(input);

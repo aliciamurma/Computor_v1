@@ -6,7 +6,7 @@
 /*   By: amurcia- <amurcia-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/02 19:39:15 by amurcia-          #+#    #+#             */
-/*   Updated: 2023/09/09 19:40:25 by amurcia-         ###   ########.fr       */
+/*   Updated: 2023/09/10 14:47:33 by amurcia-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_set_initial_letters(t_letters *let, char *input);
 void	ft_set_letters(t_letters *let, char *input);
 int		ft_get_exponential(char *str);
 int		ft_get_degree(t_letters let);
-void	ft_check_errors(char *input);
+void    ft_check_errors(char *input, char *flag);
 
 /*	UTILS	*/
 char	*ft_take_zeros(double nbr);
