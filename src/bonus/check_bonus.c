@@ -113,15 +113,10 @@ void ft_check_spaces(char *input)
     }
 }
 
-void    ft_check_errors(char *input, char *flag)
+void    ft_check_errors(char *input)
 {
-    if (ft_strncmp(flag, "Y", 2) != 0 && ft_strncmp(flag, "N", 2) != 0)
-        ft_error("You have to write \"Y\" or \"N\", please.\n");
-    if (ft_strncmp(flag, "Y", 1) == 0)
-    {
-        ft_check_spaces(input);
-        ft_between_digit(input);
-    }
+    ft_check_spaces(input);
+    ft_between_digit(input);
     ft_one_dot(input);
     ft_alone_dots(input);
     ft_check_equal(input);
