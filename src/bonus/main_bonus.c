@@ -204,18 +204,14 @@ int	main(int argc, char **argv)
 	char		*input;
 	char		*flag;
 
-	if (argc != 3)
+	if (argc != 2)
 	{
 		printf("Error in number of arguments\n");
-		printf("Please, enter a polynomial equation as first argument\n");
-		printf("Please, enter \"Y\" in case you want to check also the spaces.\n");
-		printf("Please, enter \"N\" in case you don't want to check the spaces.\n");
 		return(-1);
 	}
-	flag = ft_trim(argv[2]);
 	
 	input = ft_trim(argv[1]);
-	ft_check_errors(input, flag);
+	ft_check_errors(input);
 	ft_set_initial_letters(&letter, input);
 	ft_set_letters(&letter, input);
 	ft_reduced_form(letter);
